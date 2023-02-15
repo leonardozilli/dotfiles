@@ -32,7 +32,6 @@ Plugin 'sukima/xmledit'
 Plugin 'leafOfTree/vim-matchtag'
 
 
-
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -42,7 +41,7 @@ syntax on
 " For plugins to load correctly
 filetype plugin indent on
 
-" TODO: Pick a leader key
+" Set a leader key
 let mapleader = ","
 
 " Security
@@ -79,6 +78,12 @@ runtime! macros/matchit.vim
 nnoremap j gj
 nnoremap k gk
 
+" Move up/down file lines
+noremap K 5k
+vnoremap K 5k
+noremap J 5j
+vnoremap J 5j
+
 " Allow hidden buffers
 set hidden
 
@@ -109,12 +114,6 @@ inoremap <F1> <ESC>:set invfullscreen<CR>a
 nnoremap <F1> :set invfullscreen<CR>
 vnoremap <F1> :set invfullscreen<CR>
 
-" Move down file lines
-noremap J 5j
-vnoremap J 5j
-" Move up file lines
-noremap K 5k
-vnoremap K 5k
 
 " Textmate holdouts
 
@@ -123,9 +122,7 @@ map <leader>q gqip
 
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
-" Uncomment this to enable by default:
-" set list " To enable by default
-" Or use your leader key + l to toggle on/off
+" set list " Uncomment to  enable by default
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 "
 " splits
@@ -153,8 +150,6 @@ let g:gruvbox_material_foreground = 'mix'
 let g:gruvbox_material_better_performance = 1
 "let g:solarized_termcolors=256
 "let g:solarized_termtrans=1
-" put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
-" in ~/.vim/colors/ and uncomment:
 " colorscheme solarized
 " colorscheme peachpuff
 colorscheme gruvbox-material
