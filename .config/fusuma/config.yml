@@ -1,0 +1,6 @@
+swipe:
+  3:
+    left:
+      sendkey: "LEFTALT+LEFT" # history back
+    right:
+      sendkey: "LEFTALT+RIGHT" # history forward
