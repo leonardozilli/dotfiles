@@ -33,16 +33,20 @@ if [ -d ~/.bashrc.d ]; then
 		fi
 	done
 fi
-
 unset rc
-
 
 stty werase \^H
 
+export EDITOR=vim;
+
+. /etc/profile.d/vte.sh
+
+#vitasdk
 export VITASDK=/usr/local/vitasdk
 export PATH="$VITASDK/bin:$PATH" # add vitasdk tool to $PATH
 export PATH="$HOME/bin:$PATH"
 
+#perl
 PATH="/home/leo/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/leo/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/leo/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
