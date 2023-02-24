@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="adan"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -62,7 +62,7 @@ ZSH_THEME="robbyrussell"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-HISTFILE=~/.config/zsh/.zsh_history
+HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=20000
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
@@ -133,6 +133,7 @@ alias ..='cd ..'
 alias ls='ls --group-directories-first --color=tty'
 alias open='xdg-open'
 alias dhdk='cls ~/Desktop/dhdk/'
+alias clip='xclip -sel c <'
 
 function cls() {
     new_directory="$*";
