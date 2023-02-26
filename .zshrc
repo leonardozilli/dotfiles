@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:$HOME/Desktop/scripts
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -94,6 +95,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 bindkey '^H' backward-kill-word
+bindkey '^I' forward-word
 bindkey 'ù' autosuggest-accept
 
 
@@ -134,6 +136,9 @@ alias ls='ls --group-directories-first --color=tty'
 alias open='xdg-open'
 alias dhdk='cls ~/Desktop/dhdk/'
 alias clip='xclip -sel c <'
+alias hgrep='history | grep '
+alias conservation_on='sudo sh -c "echo 1 > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"'
+alias conservation_off='sudo sh -c "echo 0 > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"'
 
 function cls() {
     new_directory="$*";
