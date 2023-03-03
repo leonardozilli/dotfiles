@@ -1,0 +1,248 @@
+#!/bin/bash
+#
+# Read/Set battery modes in lenovo ideapad 15are05 using acpi_call kernel module
+
+## Usage: battmngr [OPTION] MODE
+## Options:
+##	-r, --read		read current battery mode
+##	-s, --set		set battery mode
+## Charge modes:
+##	on	Battery Conservation On
+##	off	Battery Conservation Off		
+##
+## Examples:
+## 	battmngr -r 
+## 	battmngr -s on
+## 	battmngr -s off
+
+
+#######################################
+# Print error messages to STDERR.
+# Globals:
+#   None
+# Arguments:
+#   Error message
+# Outputs:
+#   Writes error message to STDERR
+#######################################
+err(){
+  echo "$*" >&2
+}
+
+#######################################
+# Print usage message.
+# Globals:
+#   None
+# Arguments:
+#   None
+# Outputs:
+#   Writes usage message to STDOUT
+#######################################
+usage(){
+	printf '%s\n'\
+	""\
+	"Usage: battmngr [OPTION...] MODE"\
+	"Options:"\
+	"        -r, --read             read current battery mode"\
+	"        -s, --set              set battery mode"\
+	"Charge modes:"\
+	"        on        Battery Conservation On"\
+	"        off        Battery Conservation Off"\
+	"Examples:"\
+	"        battmngr -r "\
+	"        battmngr -s on"\
+	"        battmngr -s off"
+}
+
+#######################################
+# Handle error messages and calls err function to print these.
+# Globals:
+#   None
+# Arguments:
+#   Error code
+# Outputs:
+#   None
+#######################################
+function error(){
+	case $1 in
+
+		0)
+			err "Please provide a valid conservation mode to set (only 'on' and 'off' are valid values)"
+			usage
+		;;
+
+		3)
+			err "Conservation mode is already set to that!"
+		;;
+		
+		5)
+			err "Unrecognized battery charge mode, please retry"
+		;;
+
+		7)
+			err "Unrecognized operation"
+			usage
+		;;
+
+		8)
+			err "Please specify an operation"
+			usage
+		;;
+		
+		9)
+			err "Unexpected error"
+		;;
+		
+		10) 	
+			err "Please invoke this script using sudo"
+		;;
+
+		*)
+			err "Unknown error"
+		;;
+	esac
+	
+	exit 1
+}
+
+#######################################
+# Check if the script is called using sudo.
+#######################################
+function check_sudo(){
+	if (( $(id -u) != 0 )); then
+		error 10
+	fi;
+}
+
+
+
+#######################################
+# Read battery charge mode
+# Globals:
+#   None
+# Arguments:
+#   None
+# Outputs:
+#   Print battery charge mode names on STDOUT
+#######################################
+function read_conservation_mode(){
+	# battery conservation check
+	check=$(cat /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode)
+
+	case $check in
+
+		"0")
+			echo "Battery Conservation Off"
+		;;
+
+		"1")
+			echo "Battery Conservation On"
+		;;
+
+		*)
+			error 5
+		;;
+	esac
+}
+
+
+
+#######################################
+# Set battery charge mode
+# Globals:
+#   None
+# Arguments:
+#   Battery mode code (1,2,3,4)
+# Outputs:
+#   None
+#######################################
+function set_conservation_mode(){
+	case $1 in
+
+		"on")
+			# Battery Conservation On
+			sudo sh -c "echo '1' > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
+			echo 'Battery conservation correctly set to on'
+		;;
+		
+		"off")
+			# Battery Conservation Off
+			sudo sh -c "echo '0' > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
+			echo 'Battery conservation correctly set to off'
+		;;
+
+		*)
+			error 9
+		;;
+	esac
+
+}
+
+#######################################
+# Reads the current charge mode and 
+# check if it's equal to the expected one.
+# Globals:
+#   None
+# Arguments:
+#   Expected mode code
+# Outputs:
+#   None
+#######################################
+function check_charge_mode(){
+	check=$(cat /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode)
+	if [[ $1 == 'on' && $check == '1' ]]; then 
+		error 3	
+	elif [[ $1 == 'off' && $check == '0' ]]; then
+		error 3
+	fi
+}
+
+# ----------------------------------------------------------------
+
+	
+# check if an operation is specified
+if [ -z "$1" ]; then
+	error 8
+fi
+	
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+		-h|--help)
+		#show usage options
+		usage
+		shift
+		;;
+        -s|--set)  
+    	# set operation
+        	
+		# check if there is a parameter
+		if [ ! -z "$2" ]; then 
+			# if it's not numeric calls error
+			if ! [[ $2 =~ ^(on|off)+$ ]]; then
+				error 0
+			fi
+			
+			# if the parameter is good, set param
+			check_charge_mode $2
+			set_conservation_mode $2
+			shift
+		
+		# if there is no parameter calls error
+		else
+			error 0
+		fi
+        	shift
+        	;;
+        	
+        -r|--read) 
+        # read mode
+		read_conservation_mode
+		shift
+		;;
+        *) 
+        	error 7
+        	;;
+    esac
+    
+done
+exit 0

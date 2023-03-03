@@ -95,7 +95,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 bindkey '^H' backward-kill-word
-bindkey '^I' forward-word
+#bindkey '^I' forward-word
 bindkey 'ù' autosuggest-accept
 
 
