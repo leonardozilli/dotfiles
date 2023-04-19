@@ -1,7 +1,8 @@
-[user]
-	name = leonardozilli
-	email = leonardo.zilli19@gmail.com
+[include]
+  path = ~/.gitconfig.local
 [color]
 	ui = true
 [core]
 	editor = vim
+[init]
+	defaultBranch = main

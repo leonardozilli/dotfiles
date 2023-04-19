@@ -137,10 +137,8 @@ alias open='xdg-open'
 alias dhdk='cls ~/Desktop/dhdk/'
 alias clip='xclip -sel c <'
 alias hgrep='history | grep '
-alias conservation_on='sudo sh -c "echo 1 > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"'
-alias conservation_off='sudo sh -c "echo 0 > /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"'
 
-function cls() {
+function cl() {
     new_directory="$*";
     if [ $# -eq 0 ]; then
         new_directory=${HOME};
