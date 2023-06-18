@@ -137,6 +137,8 @@ alias open='xdg-open'
 alias dhdk='cls ~/Desktop/dhdk/'
 alias clip='xclip -sel c <'
 alias hgrep='history | grep '
+alias trun='gnome-terminal -- sh -c'
+alias vim='nvim'
 
 function cl() {
     new_directory="$*";
