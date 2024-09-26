@@ -1,6 +1,12 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:$HOME/Desktop/scripts
+#export PATH=$HOME/anaconda3/bin:$PATH
+export PATH=/usr/local/texlive/2021/bin/x86_64-linux:$PATH    
+export INFOPATH=$INFOPATH:/usr/local/texlive/2021/texmf-dist/doc/info
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#export PATH="$HOME/.rbenv/shims:$PATH"
+export MANPATH=$MANPATH:/usr/local/texlive/2021/texmf-dist/doc/man
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -88,6 +94,7 @@ plugins=(
   zsh-syntax-highlighting
   command-not-found
   autojump
+  asdf
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -139,6 +146,7 @@ alias clip='xclip -sel c <'
 alias hgrep='history | grep '
 alias trun='gnome-terminal -- sh -c'
 alias vim='nvim'
+alias chromium='flatpak run com.github.Eloston.UngoogledChromium'
 
 function cl() {
     new_directory="$*";
@@ -148,3 +156,4 @@ function cl() {
     builtin cd "${new_directory}" && ls
 }
 
+eval "$(rbenv init -)"
