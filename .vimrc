@@ -7,6 +7,8 @@ set hlsearch
 set incsearch
 
 inoremap jj <ESC>
+inoremap JJ <ESC>
+inoremap <C-h> <C-w>
 nnoremap <Tab> <C-w>
 " Don't try to be vi compatible
 set nocompatible

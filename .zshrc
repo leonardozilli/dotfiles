@@ -1,93 +1,28 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$PATH:$HOME/Desktop/scripts
-#export PATH=$HOME/anaconda3/bin:$PATH
-export PATH=/usr/local/texlive/2021/bin/x86_64-linux:$PATH    
-export INFOPATH=$INFOPATH:/usr/local/texlive/2021/texmf-dist/doc/info
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#export PATH="$HOME/.rbenv/shims:$PATH"
-export MANPATH=$MANPATH:/usr/local/texlive/2021/texmf-dist/doc/man
+#===============================
+# PATH Setup
+#===============================
+USER_LOCAL="$HOME/.local/bin"
+USER_BIN="$HOME/bin"
+USER_SCRIPTS="$HOME/Desktop/scripts"
 
-# Path to your oh-my-zsh installation.
+USR_LOCAL_BIN="/usr/local/bin"
+USR_LOCAL_SBIN="/usr/local/sbin"
+USR_BIN="/usr/bin"
+USR_SBIN="/usr/sbin"
+
+TEXLIVE_BIN="/usr/local/texlive/2021/bin/x86_64-linux"
+
+export PATH="$USER_LOCAL:$USER_BIN:$USER_SCRIPTS:$USR_LOCAL_BIN:$USR_LOCAL_SBIN:$USR_BIN:$USR_SBIN:$TEXLIVE_BIN"
+
+export MANPATH="$MANPATH:/usr/local/texlive/2021/texmf-dist/doc/man"
+export INFOPATH="$INFOPATH:/usr/local/texlive/2021/texmf-dist/doc/info"
+
+#===============================
+# Oh My Zsh
+#===============================
 export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="adan"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=20000
-setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt hist_ignore_dups       # ignore duplicated commands history list
-setopt hist_ignore_space      # ignore commands that start with space
-setopt hist_verify            # show command with history expansion to user before running it
-setopt share_history          # share command history data
-
-
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
   zsh-autosuggestions
@@ -99,44 +34,40 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+#===============================
+# History Configuration
+#===============================
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=20000
+setopt hist_expire_dups_first  # Delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups        # Ignore duplicated commands
+setopt hist_ignore_space       # Ignore commands starting with space
+setopt hist_verify             # Show command with history expansion before running
+setopt share_history           # Share history across sessions
 
-bindkey '^H' backward-kill-word
-#bindkey '^I' forward-word
-bindkey 'ù' autosuggest-accept
+#===============================
+# Key Bindings
+#===============================
+bindkey '^H' backward-kill-word    # Ctrl-H deletes previous word
+# bindkey '^I' forward-word        # Optional: uncomment to move forward by word
+bindkey 'ù' autosuggest-accept    # Accept suggestion with 'ù'
 
+#===============================
+# Editor
+#===============================
+export EDITOR='nvim'
 
-export EDITOR=vim;
+#===============================
+# Completion & Globbing
+#===============================
+setopt AUTO_LIST              # Auto list choices on ambiguous completion
+setopt COMPLETE_IN_WORD       # Complete from any part of a word
+setopt extended_glob          # Extended globbing
 
-setopt AUTO_LIST            # Automatically list choices on ambiguous completion.
-setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-
-
+#===============================
+# Aliases
+#===============================
 alias lt='ls --human-readable --size -1 -S --classify'
 alias ..='cd ..'
 alias ls='ls --group-directories-first --color=tty'
@@ -148,12 +79,18 @@ alias trun='gnome-terminal -- sh -c'
 alias vim='nvim'
 alias chromium='flatpak run com.github.Eloston.UngoogledChromium'
 
-function cl() {
-    new_directory="$*";
+#===============================
+# Functions
+#===============================
+cl() {
+    local new_directory="$*"
     if [ $# -eq 0 ]; then
-        new_directory=${HOME};
-    fi;
-    builtin cd "${new_directory}" && ls
+        new_directory="$HOME"
+    fi
+    builtin cd "$new_directory" && ls
 }
 
-eval "$(rbenv init -)"
+#===============================
+# Terminal integration
+#===============================
+printf "\033]7;file://%s%s\033\\" "${HOSTNAME}" "$(/usr/libexec/vte-urlencode-cwd)"
