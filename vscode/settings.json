@@ -1,0 +1,166 @@
+{
+  "editor.minimap.enabled": false,
+  "vim.vimrc.enable": true,
+  "vim.vimrc.path": "~/.vimrc",
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "ruff.lineLength": 120,
+  "redhat.telemetry.enabled": false,
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "editor.inlineSuggest.enabled": true,
+  "editor.inlineSuggest.edits.showCollapsed": true,
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "scminput": false,
+    "xml": false,
+    "latex": true,
+    "python": true
+  },
+  "emmet.includeLanguages": {
+    "latex": "html"
+},
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "xml.format.closingBracketNewLine": true,
+  "xml.format.joinContentLines": true,
+  "liveServer.settings.donotVerifyTags": true,
+  "html.format.contentUnformatted": "pre,code,textarea,p",
+  "html.format.unformatted": "p",
+  "workbench.activityBar.location": "top",
+  "window.zoomLevel": -1,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "jupyter.askForKernelRestart": false,
+  "svelte.enable-ts-plugin": true,
+  "jupyter.runStartupCommands": ["%load_ext autoreload", "%autoreload 2"],
+  "explorer.confirmDragAndDrop": false,
+  "latex-workshop.latex.watch.files.ignore": [
+    "**/*.bbx",
+    "**/*.bbl",
+    "**/*.cbx",
+    "**/*.cfg",
+    "**/*.clo",
+    "**/*.cnf",
+    "**/*.def",
+    "**/*.dfu",
+    "**/*.enc",
+    "**/*.fd",
+    "**/*.fmt",
+    "**/*.lbx",
+    "**/*.map",
+    "**/*.mkii",
+    "**/*.pfb",
+    "**/*.tfm",
+    "**/*.vf",
+    "**/*.code.tex",
+    "**/*.sty",
+    "**/texmf-{dist,var}/**",
+    "**/Local/MiKTeX/**",
+    "**/Local/Programs/MiKTeX/**",
+    "**/Roaming/MiKTeX/**",
+    "**/Program*/MiKTeX*/**",
+    "**/.miktex/texmfs/**",
+    "/var/cache/miktex-texmf/**",
+    "/usr/local/share/miktex-texmf/**",
+    "**/Library/Application Support/MiKTeX/texmfs/**",
+    "/dev/null",
+    "**/.examples/**",
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-pdf",
+        "-outdir=%OUTDIR%",
+        "%DOC%"
+      ],
+      "env": {}
+    },
+    {
+      "name": "pdflatex",
+      "command": "pdflatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ],
+      "env": {}
+    },
+    {
+      "name": "bibtex",
+      "command": "bibtex",
+      "args": ["%DOCFILE%"],
+      "env": {}
+    },
+    {
+    "name": "xelatex",
+    "command": "latexmk",
+    "args": [
+        "-xelatex",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ]
+    },
+    {
+      "name": "biber",
+      "command": "biber",
+      "args": ["%DOCFILE%"]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk",
+      "tools": ["latexmk"]
+    },
+    {
+      "name": "pdflatex -> bibtex -> pdflatex * 2",
+      "tools": ["pdflatex", "biber", "pdflatex", "pdflatex"]
+    },
+    {
+      "name": "xelatex",
+      "tools": ["xelatex"]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "lastUsed",
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.intellisense.citation.backend": "biblatex",
+  "latex-workshop.synctex.afterBuild.enabled": true,
+  "latex-workshop.latex.autoClean.run": "onBuilt",
+  "[latex]": {
+    "editor.defaultFormatter": "James-Yu.latex-workshop"
+  },
+  "git.openRepositoryInParentFolders": "never",
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "workbench.editor.enablePreview": false,
+  "workbench.startupEditor": "none",
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "remote.autoForwardPortsSource": "hybrid",
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  "chat.viewSessions.orientation": "stacked",
+  "editor.inlayHints.enabled": "offUnlessPressed"
+}

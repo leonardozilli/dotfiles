@@ -1,68 +1,24 @@
-set title
-set titlestring=%t
-set confirm
-set ignorecase
-set showmode
-set hlsearch
-set incsearch
-
-inoremap jj <ESC>
-inoremap JJ <ESC>
-inoremap <C-h> <C-w>
-nnoremap <Tab> <C-w>
-" Don't try to be vi compatible
+" --- Basics ----------------------------------------------------
 set nocompatible
-
-" Helps force plugins to load correctly when it is turned back on below
-filetype off
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-"" TODO: Load plugins here (pathogen or vundle)
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'preservim/nerdtree'
-Plugin 'vim-airline/vim-airline'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'raimondi/delimitmate'
-Plugin 'sainnhe/gruvbox-material'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'romainl/Apprentice'
-Plugin 'sukima/xmledit'
-Plugin 'leafOfTree/vim-matchtag'
-
-
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" Turn on syntax highlighting
-syntax on
-
-" For plugins to load correctly
-filetype plugin indent on
-
-" Set a leader key
-let mapleader = ","
-
-" Security
+set encoding=utf-8
+set hidden
+set confirm
 set modelines=0
 
-" Show line numbers
+set title
+set titlestring=%t
+set clipboard=unnamedplus
+
+" UI
 set number
-
-" Show file stats
 set ruler
+set laststatus=2
+set showcmd
+set showmode
 
-" Blink cursor on error instead of beeping (grr)
-
-" Encoding
-set encoding=utf-8
-
-" Whitespace
+" --- Whitespace / formatting -----------------------------------
 set wrap
-set textwidth=79
+set textwidth=80
 set formatoptions=tcqrn1
 set tabstop=2
 set shiftwidth=2
@@ -70,89 +26,84 @@ set softtabstop=2
 set expandtab
 set noshiftround
 
-" Cursor motion
-set scrolloff=3
-set backspace=indent,eol,start
-set matchpairs+=<:> " use % to jump between pairs
-runtime! macros/matchit.vim
-
-" Move up/down editor lines
-nnoremap j gj
-nnoremap k gk
-
-" Move up/down file lines
-noremap K 5k
-vnoremap K 5k
-noremap J 5j
-vnoremap J 5j
-
-" Allow hidden buffers
-set hidden
-
-" Rendering
-set ttyfast
-
-" Status bar
-set laststatus=2
-
-" Last line
-set showmode
-set showcmd
-
-" Searching
-"nnoremap / /\v
-"vnoremap / /\v
+" --- Search ----------------------------------------------------
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 set showmatch
-map <leader><space> :let @/=''<cr> " clear search
-set backspace=indent,eol,start
+nnoremap / /\v
+vnoremap / /\v
+nnoremap <leader><space> :let @/=''<cr>
 
+" --- Cursor / motion -------------------------------------------
+set scrolloff=3
+set matchpairs+=<:> " use % to jump between pairs
+runtime! macros/matchit.vim
 
-" Remap help key.
-inoremap <F1> <ESC>:set invfullscreen<CR>a
-nnoremap <F1> :set invfullscreen<CR>
-vnoremap <F1> :set invfullscreen<CR>
+nnoremap j gj
+nnoremap k gk
 
+noremap K 5k
+vnoremap K 5k
+noremap J 5j
+vnoremap J 5j
 
-" Textmate holdouts
+" --- Insert mappings -------------------------------------------
+inoremap jj <ESC>
+inoremap JJ <ESC>
+inoremap <C-h> <C-w>
+nnoremap <Tab> <C-w>
 
-" Formatting
-map <leader>q gqip
-
-" Visualize tabs and newlines
-set listchars=tab:▸\ ,eol:¬
-" set list " Uncomment to  enable by default
-map <leader>l :set list!<CR> " Toggle tabs and EOL
-"
-" splits
+" --- Splits ----------------------------------------------------
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" tabs
-map <leader>tn :tabnew 
-map <leader>t<leader> :tabnext<cr>
-map <leader>tm :tabmove
-map <leader>tc :tabclose<cr>
-map <leader>to :tabonly<cr>
+" --- Leader ----------------------------------------------------
+let mapleader = " "
 
+" Formatting
+nnoremap <leader>q gqip
 
-" Color scheme (terminal)
+" Listchars toggle
+set listchars=tab:▸\ ,eol:¬
+nnoremap <leader>l :set list!<CR>
+
+" Tabs
+nnoremap <leader>tn :tabnew<CR>
+nnoremap <leader>t<leader> :tabnext<CR>
+nnoremap <leader>tm :tabmove<Space>
+nnoremap <leader>tc :tabclose<CR>
+nnoremap <leader>to :tabonly<CR>
+
+" --- Plugins (Vundle) ------------------------------------------
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'preservim/nerdtree'
+Plugin 'vim-airline/vim-airline'
+Plugin 'raimondi/delimitmate'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'sukima/xmledit'
+Plugin 'leafOfTree/vim-matchtag'
+Plugin 'sainnhe/gruvbox-material'
+
+call vundle#end()
+filetype plugin indent on
+syntax on
+
+" --- Colorscheme -----------------------------------------------
 if has('termguicolors')
   set termguicolors
 endif
-"set t_Co=256
 set background=dark
 let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_foreground = 'mix'
 let g:gruvbox_material_better_performance = 1
-"let g:solarized_termcolors=256
-"let g:solarized_termtrans=1
-" colorscheme solarized
-" colorscheme peachpuff
 colorscheme gruvbox-material
-" colorscheme apprentice
